@@ -3,9 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ukrainian IPA Soundboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the soundboard */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #2D6A6A; /* Dark teal background for the page */
+        }
+        .sound-card {
+            background-color: #3FA796; /* Teal background for cards */
+            border: 2px solid #1E4D4D;
+        }
+        .sound-card.playing {
+            transform: scale(0.98);
+            border-color: #A9D9D0;
+            box-shadow: 0 0 20px rgba(169, 217, 208, 0.5);
+        }
+        .words-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .unfold-button svg {
+            transition: transform 0.3s ease-in-out;
+        }
+        .unfold-button.open svg {
+            transform: rotate(180deg);
+        }
+    </style>
 </head>
-<body>
-    Hello World
+<body class="text-white">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl sm:text-5xl font-bold">Фонеми Української Мови (IPA)</h1>
+            <p class="text-lg text-teal-200 mt-2">Натисніть на символ, щоб почути його звук (Click a symbol to hear its sound)</p>
+        </header>
+
+        <!-- Soundboard Container -->
+        <main id="soundboard-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <!-- Cards will be dynamically inserted here by JavaScript -->
+        </main>
+
+        <footer class="text-center mt-12 text-teal-300">
+            <p>Created with ❤️ for learning Ukrainian phonetics.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Array of Ukrainian IPA phonemes with corrected audio file names to match user's structure.
+            const ukrainianIPASounds = [
+                // Vowels
+                { symbol: '/i/', examples: ['дім', 'сіль', 'лід'], audioFile: 'ukrainain-i.ogg' },
+                { symbol: '/ɪ/', examples: ['син', 'жито', 'бити'], audioFile: 'ukrainain-ɪ.ogg' },
+                { symbol: '/ɛ/', examples: ['день', 'село', 'мед'], audioFile: 'ukrainain-ɛ.ogg' },
+                { symbol: '/a/', examples: ['так', 'мама', 'сади'], audioFile: 'ukrainain-a.ogg' },
+                { symbol: '/ɔ/', examples: ['сон', 'вода', 'поле'], audioFile: 'ukrainain-ɔ.ogg' },
+                { symbol: '/u/', examples: ['дуб', 'сума', 'рука'], audioFile: 'ukrainain-u.ogg' },
+                // Consonants
+                { symbol: '/p/', examples: ['тато', 'поле', 'суп'], audioFile: 'ukrainian-p.ogg' },
+                { symbol: '/b/', examples: ['дуб', 'риба', 'баба'], audioFile: 'ukrainian-b.ogg' },
+                { symbol: '/t/', examples: ['так', 'тінь', 'тато'], audioFile: 'ukrainian-t.ogg' },
+                { symbol: '/d/', examples: ['дім', 'вода', 'день'], audioFile: 'ukrainian-d.ogg' },
+                { symbol: '/k/', examples: ['кіт', 'так', 'рука'], audioFile: 'ukrainian-k.ogg' },
+                { symbol: '/ɡ/', examples: ['ґанок', 'ґудзик', 'аґрус'], audioFile: 'ukrainian-g.ogg' },
+                { symbol: '/m/', examples: ['мама', 'дім', 'сума'], audioFile: 'ukrainian-m.ogg' },
+                { symbol: '/n/', examples: ['сон', 'ніс', 'син'], audioFile: 'ukrainian-n.ogg' },
+                { symbol: '/f/', examples: ['фікус', 'факт', 'кава'], audioFile: 'ukrainian-f.ogg' },
+                { symbol: '/v/', examples: ['вода', 'вовк', 'лев'], audioFile: 'ukrainian-v.ogg' },
+                { symbol: '/s/', examples: ['сон', 'сіль', 'ліс'], audioFile: 'ukrainian-s.ogg' },
+                { symbol: '/z/', examples: ['зуб', 'ваза', 'зима'], audioFile: 'ukrainian-z.ogg' },
+                { symbol: '/ʃ/', examples: ['шіст', 'шапка', 'миша'], audioFile: 'ukrainian-sh.ogg' },
+                { symbol: '/ʒ/', examples: ['жаба', 'жито', 'вуж'], audioFile: 'ukrainian-zh.ogg' },
+                { symbol: '/x/', examples: ['хліб', 'хата', 'вухо'], audioFile: 'ukrainian-kh.ogg' },
+                { symbol: '/ɦ/', examples: ['голова', 'нога', 'сніг'], audioFile: 'ukrainian-h.ogg' },
+                { symbol: '/t͡s/', examples: ['цап', 'ціна', 'кінець'], audioFile: 'ukrainian-ts.ogg' },
+                { symbol: '/d͡z/', examples: ['дзеркало', 'дзьоб', 'ґедзь'], audioFile: 'ukrainian-dz.ogg' },
+                { symbol: '/t͡ʃ/', examples: ['час', 'ніч', 'читати'], audioFile: 'ukrainian-ch.ogg' },
+                { symbol: '/d͡ʒ/', examples: ['джміль', 'джем', 'ходжу'], audioFile: 'ukrainian-dzh.ogg' },
+                { symbol: '/l/', examples: ['лев', 'поле', 'сіль'], audioFile: 'ukrainian-l.ogg' },
+                { symbol: '/r/', examples: ['рука', 'риба', 'цар'], audioFile: 'ukrainian-r.ogg' },
+                { symbol: '/j/', examples: ['йод', 'яма', 'мої'], audioFile: 'ukrainian-j.ogg' },
+                // Palatalized Consonants
+                { symbol: '/tʲ/', examples: ['тінь', 'тісто', 'тютюн'], audioFile: 'ukrainian-t-palatalized.ogg' },
+                { symbol: '/dʲ/', examples: ['дідько', 'дядько', 'мідь'], audioFile: 'ukrainian-d-palatalized.ogg' },
+                { symbol: '/sʲ/', examples: ['сіно', 'вісь', 'сьомий'], audioFile: 'ukrainian-s-palatalized.ogg' },
+                { symbol: '/zʲ/', examples: ['зір', 'зяблик', 'князь'], audioFile: 'ukrainian-z-palatalized.ogg' },
+                { symbol: '/t͡sʲ/', examples: ['ціль', 'палець', 'хлопець'], audioFile: 'ukrainian-ts-palatalized.ogg' },
+                { symbol: '/lʲ/', examples: ['ліс', 'лялька', 'сіль'], audioFile: 'ukrainian-l-palatalized.ogg' },
+                { symbol: '/nʲ/', examples: ['ніч', 'кінь', 'синь'], audioFile: 'ukrainian-n-palatalized.ogg' },
+            ];
+
+            const container = document.getElementById('soundboard-container');
+            let currentlyPlaying = null;
+
+            const createSoundCard = (soundObj) => {
+                const cardWrapper = document.createElement('div');
+                cardWrapper.className = 'sound-card flex flex-col rounded-lg shadow-lg transition-all duration-200 ease-in-out';
+
+                const topPart = document.createElement('div');
+                topPart.className = 'flex items-center justify-between p-4 cursor-pointer';
+                
+                const symbolSpan = document.createElement('span');
+                symbolSpan.className = 'text-4xl font-bold';
+                symbolSpan.textContent = soundObj.symbol;
+                
+                const unfoldButton = document.createElement('div');
+                unfoldButton.className = 'unfold-button p-2 rounded-full hover:bg-teal-600';
+                unfoldButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>`;
+                
+                topPart.appendChild(symbolSpan);
+                topPart.appendChild(unfoldButton);
+
+                const wordsContainer = document.createElement('div');
+                wordsContainer.className = 'words-container px-4';
+                
+                const wordList = document.createElement('ul');
+                wordList.className = 'list-disc list-inside pb-4 text-teal-100';
+                soundObj.examples.forEach(word => {
+                    const li = document.createElement('li');
+                    li.textContent = word;
+                    wordList.appendChild(li);
+                });
+                wordsContainer.appendChild(wordList);
+
+                cardWrapper.appendChild(topPart);
+                cardWrapper.appendChild(wordsContainer);
+                
+                // Event listener for sound playback using corrected local audio file paths
+                topPart.addEventListener('click', () => {
+                    if(currentlyPlaying) {
+                        currentlyPlaying.pause();
+                        currentlyPlaying.currentTime = 0;
+                    }
+
+                    // Corrected path to match user's file structure
+                    const audio = new Audio(`assets/sound/ukrainian-sounds/${soundObj.audioFile}`);
+                    currentlyPlaying = audio;
+
+                    audio.play();
+                    
+                    cardWrapper.classList.add('playing');
+                    audio.onended = () => {
+                        cardWrapper.classList.remove('playing');
+                        currentlyPlaying = null;
+                    };
+                    audio.onerror = () => {
+                         cardWrapper.classList.remove('playing');
+                         console.error(`Could not play audio file: assets/sound/ukrainian-sounds/${soundObj.audioFile}`);
+                    };
+                });
+                
+                // Event listener for unfolding words
+                unfoldButton.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent sound from playing when clicking the button
+                    unfoldButton.classList.toggle('open');
+                    if (wordsContainer.style.maxHeight) {
+                        wordsContainer.style.maxHeight = null;
+                    } else {
+                        wordsContainer.style.maxHeight = wordsContainer.scrollHeight + "px";
+                    }
+                });
+
+                container.appendChild(cardWrapper);
+            };
+
+            ukrainianIPASounds.forEach(createSoundCard);
+        });
+    </script>
+
 </body>
 </html>
