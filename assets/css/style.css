@@ -1,0 +1,78 @@
+/* GitHub Dark Mode Inspired Styles */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    background-color: #0d1117; /* GitHub dark background */
+    color: #c9d1d9; /* GitHub light text */
+}
+
+header h1 {
+    font-weight: 600;
+    letter-spacing: -0.05em;
+}
+
+header p {
+    color: #8b949e; /* GitHub secondary text */
+}
+
+/* Card Styling */
+.sound-card {
+    background-color: #161b22; /* GitHub dark secondary background */
+    border: 1px solid #30363d; /* GitHub border color */
+    border-radius: 6px;
+    padding: 16px;
+    transition: all 0.2s ease-in-out;
+}
+
+.sound-card.playing, .word-audio-icon.playing svg {
+    color: #58a6ff; /* GitHub blue for active elements */
+}
+
+/* Main IPA symbol */
+.ipa-symbol-container {
+    cursor: pointer;
+    border-bottom: 1px solid #21262d; /* GitHub subtle border */
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.ipa-symbol-container:hover {
+    background-color: #21262d;
+}
+
+.ipa-symbol {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 2.5rem; /* 40px */
+    font-weight: 700;
+}
+
+/* Example Words List */
+.example-words-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 4px;
+    border-radius: 4px;
+}
+
+.example-words-list li:hover {
+    background-color: #21262d;
+}
+
+.word-text {
+    font-size: 1rem; /* 16px */
+    color: #c9d1d9;
+}
+
+.word-audio-icon {
+    cursor: pointer;
+    color: #8b949e; /* Default icon color */
+    transition: color 0.2s ease-in-out;
+}
+
+.word-audio-icon:hover {
+    color: #58a6ff; /* Hover icon color */
+}
+
+footer {
+    color: #8b949e;
+}
