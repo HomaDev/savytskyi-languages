@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('soundboard-container');
     const audioPlayer = document.getElementById('audio-player');
     let activeElement = null;
+    let isAudioContextUnlocked = false; // Flag for iOS audio unlock
 
     // Stop audio and remove the 'playing' class from the active element
     const stopCurrentAudio = () => {
@@ -129,39 +130,80 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add event listener to the single audio player to handle cleanup when a sound finishes
     audioPlayer.addEventListener('ended', stopCurrentAudio);
-    audioPlayer.addEventListener('error', stopCurrentAudio);
+    audioPlayer.addEventListener('error', (e) => {
+        console.error('Audio player error event:', e, audioPlayer.error);
+        stopCurrentAudio();
+    });
 
+    // Function to play a sound, handling iOS unlock
+    const playSound = (element, soundFile, pathPrefix) => {
+        // If audio context is not unlocked, try to unlock it first
+        if (!isAudioContextUnlocked) {
+            // On iOS, the first audio play must be directly user-initiated.
+            // We play the requested sound and immediately pause it to "unlock" the audio context.
+            audioPlayer.src = `${pathPrefix}${soundFile}`;
+            audioPlayer.load();
+            const unlockPromise = audioPlayer.play();
+
+            if (unlockPromise !== undefined) {
+                unlockPromise.then(() => {
+                    audioPlayer.pause(); // Immediately pause after starting
+                    audioPlayer.currentTime = 0; // Reset
+                    isAudioContextUnlocked = true;
+                    console.log("Audio context unlocked for iOS.");
+                    // Now play the sound for real
+                    actuallyPlaySound(element, soundFile, pathPrefix);
+                }).catch(error => {
+                    console.error("Audio unlock play() failed. Subsequent plays might also fail on iOS.", error);
+                    // Don't mark as unlocked if the initial play fails. User might need to interact again.
+                    stopCurrentAudio(); // Clean up UI
+                });
+            } else {
+                // Fallback for browsers that don't return a promise (rare for modern browsers)
+                // Assume it might work or not be needed, or try to play directly.
+                isAudioContextUnlocked = true; // Tentatively mark as unlocked
+                actuallyPlaySound(element, soundFile, pathPrefix);
+            }
+        } else {
+            // Audio context is already unlocked, play directly
+            actuallyPlaySound(element, soundFile, pathPrefix);
+        }
+    };
+
+    // The actual sound playing logic, called after potential unlock
+    const actuallyPlaySound = (element, soundFile, pathPrefix) => {
+        stopCurrentAudio(); // Stop any currently playing sound
+        activeElement = element;
+        
+        audioPlayer.src = `${pathPrefix}${soundFile}`;
+        audioPlayer.load(); // Ensure the new source is loaded
+        const playPromise = audioPlayer.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                element.classList.add('playing');
+            }).catch(error => {
+                console.error("Playback failed:", error);
+                // Ensure UI is cleaned up if play fails
+                if (activeElement === element) { // Check if it's still the active one
+                    stopCurrentAudio();
+                }
+            });
+        }
+    };
 
     const createSoundCard = (soundObj) => {
         const cardWrapper = document.createElement('div');
         cardWrapper.className = 'sound-card';
 
-        // --- Create and handle main phoneme sound ---
         const ipaSymbolContainer = document.createElement('div');
         ipaSymbolContainer.className = 'ipa-symbol-container';
         ipaSymbolContainer.innerHTML = `<h2 class="ipa-symbol">${soundObj.symbol}</h2>`;
         
         ipaSymbolContainer.addEventListener('click', () => {
-            stopCurrentAudio();
-            activeElement = ipaSymbolContainer; // Set the current playing element
-            
-            audioPlayer.src = `assets/sound/ukrainian-sounds/${soundObj.phonemeFile}`;
-            audioPlayer.load();
-            const playPromise = audioPlayer.play();
-
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    // Automatic playback started!
-                    ipaSymbolContainer.classList.add('playing');
-                }).catch(error => {
-                    // Auto-play was prevented
-                    console.error("Playback failed:", error);
-                    stopCurrentAudio();
-                });
-            }
+            playSound(ipaSymbolContainer, soundObj.phonemeFile, 'assets/sound/ukrainian-sounds/');
         });
 
-        // --- Create and handle example words list ---
         const wordList = document.createElement('ul');
         wordList.className = 'example-words-list';
 
@@ -178,21 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             audioIcon.addEventListener('click', (e) => {
                 e.stopPropagation();
-                stopCurrentAudio();
-                activeElement = audioIcon; // Set the current playing element
-                
-                audioPlayer.src = `assets/sound/ukrainian-words/${example.audioFile}`;
-                audioPlayer.load();
-                const playPromise = audioPlayer.play();
-
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                        audioIcon.classList.add('playing');
-                    }).catch(error => {
-                        console.error("Playback failed:", error);
-                        stopCurrentAudio();
-                    });
-                }
+                playSound(audioIcon, example.audioFile, 'assets/sound/ukrainian-words/');
             });
 
             listItem.appendChild(wordText);
