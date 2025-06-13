@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Complete data structure with all sounds and example words.
-    // Ensure you have audio files named exactly as specified in `phonemeFile` and `audioFile`.
     const ukrainianIPASounds = [
         // Vowels
         { symbol: '/i/', phonemeFile: 'ukrainain-i.ogg', examples: [
@@ -116,21 +114,23 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const container = document.getElementById('soundboard-container');
-    let currentlyPlaying = null;
-    let activeIcon = null;
+    const audioPlayer = document.getElementById('audio-player');
+    let activeElement = null;
 
-    // Function to stop any currently playing audio and reset its icon
+    // Stop audio and remove the 'playing' class from the active element
     const stopCurrentAudio = () => {
-        if (currentlyPlaying) {
-            currentlyPlaying.pause();
-            currentlyPlaying.currentTime = 0;
-            currentlyPlaying = null;
-        }
-        if (activeIcon) {
-            activeIcon.classList.remove('playing');
-            activeIcon = null;
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+        if (activeElement) {
+            activeElement.classList.remove('playing');
+            activeElement = null;
         }
     };
+    
+    // Add event listener to the single audio player to handle cleanup when a sound finishes
+    audioPlayer.addEventListener('ended', stopCurrentAudio);
+    audioPlayer.addEventListener('error', stopCurrentAudio);
+
 
     const createSoundCard = (soundObj) => {
         const cardWrapper = document.createElement('div');
@@ -143,21 +143,22 @@ document.addEventListener('DOMContentLoaded', () => {
         
         ipaSymbolContainer.addEventListener('click', () => {
             stopCurrentAudio();
+            activeElement = ipaSymbolContainer; // Set the current playing element
             
-            const audio = new Audio(`assets/sound/ukrainian-sounds/${soundObj.phonemeFile}`);
-            currentlyPlaying = audio;
-            
-            ipaSymbolContainer.classList.add('playing');
-            audio.play();
-            
-            audio.onended = () => {
-                ipaSymbolContainer.classList.remove('playing');
-                currentlyPlaying = null;
-            };
-            audio.onerror = () => {
-                 ipaSymbolContainer.classList.remove('playing');
-                 console.error(`Could not play audio file: assets/sound/ukrainian-sounds/${soundObj.phonemeFile}`);
-            };
+            audioPlayer.src = `assets/sound/ukrainian-sounds/${soundObj.phonemeFile}`;
+            audioPlayer.load();
+            const playPromise = audioPlayer.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Automatic playback started!
+                    ipaSymbolContainer.classList.add('playing');
+                }).catch(error => {
+                    // Auto-play was prevented
+                    console.error("Playback failed:", error);
+                    stopCurrentAudio();
+                });
+            }
         });
 
         // --- Create and handle example words list ---
@@ -178,24 +179,20 @@ document.addEventListener('DOMContentLoaded', () => {
             audioIcon.addEventListener('click', (e) => {
                 e.stopPropagation();
                 stopCurrentAudio();
-
-                const audio = new Audio(`assets/sound/ukrainian-words/${example.audioFile}`);
-                currentlyPlaying = audio;
-                activeIcon = audioIcon;
+                activeElement = audioIcon; // Set the current playing element
                 
-                audioIcon.classList.add('playing');
-                audio.play();
+                audioPlayer.src = `assets/sound/ukrainian-words/${example.audioFile}`;
+                audioPlayer.load();
+                const playPromise = audioPlayer.play();
 
-                audio.onended = () => {
-                    audioIcon.classList.remove('playing');
-                    activeIcon = null;
-                    currentlyPlaying = null;
-                };
-                 audio.onerror = () => {
-                    audioIcon.classList.remove('playing');
-                    activeIcon = null;
-                    console.error(`Could not play audio file: assets/sound/ukrainian-words/${example.audioFile}`);
-                };
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        audioIcon.classList.add('playing');
+                    }).catch(error => {
+                        console.error("Playback failed:", error);
+                        stopCurrentAudio();
+                    });
+                }
             });
 
             listItem.appendChild(wordText);
