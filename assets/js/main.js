@@ -1,115 +1,115 @@
 document.addEventListener('DOMContentLoaded', () => {
     const ukrainianIPASounds = [
         // Vowels
-        { symbol: '/i/', phonemeFile: 'ukrainain-i.ogg', examples: [
-            { word: 'дім', audioFile: 'дім.ogg' }, { word: 'сіль', audioFile: 'сіль.ogg' }, { word: 'лід', audioFile: 'лід.ogg' }
+        { symbol: '/i/', phonemeFile: 'i.mp3', examples: [
+            { word: 'дім', audioFile: 'дім.mp3' }, { word: 'сіль', audioFile: 'сіль.mp3' }, { word: 'лід', audioFile: 'лід.mp3' }
         ]},
-        { symbol: '/ɪ/', phonemeFile: 'ukrainain-ɪ.ogg', examples: [
-            { word: 'син', audioFile: 'син.ogg' }, { word: 'жито', audioFile: 'жито.ogg' }, { word: 'бити', audioFile: 'бити.ogg' }
+        { symbol: '/ɪ/', phonemeFile: 'ɪ.mp3', examples: [
+            { word: 'син', audioFile: 'син.mp3' }, { word: 'жито', audioFile: 'жито.mp3' }, { word: 'бити', audioFile: 'бити.mp3' }
         ]},
-        { symbol: '/ɛ/', phonemeFile: 'ukrainain-ɛ.ogg', examples: [
-            { word: 'день', audioFile: 'день.ogg' }, { word: 'село', audioFile: 'село.ogg' }, { word: 'мед', audioFile: 'мед.ogg' }
+        { symbol: '/ɛ/', phonemeFile: 'ɛ.mp3', examples: [
+            { word: 'день', audioFile: 'день.mp3' }, { word: 'село', audioFile: 'село.mp3' }, { word: 'мед', audioFile: 'мед.mp3' }
         ]},
-        { symbol: '/a/', phonemeFile: 'ukrainain-a.ogg', examples: [
-            { word: 'так', audioFile: 'так.ogg' }, { word: 'мама', audioFile: 'мама.ogg' }, { word: 'сади', audioFile: 'сади.ogg' }
+        { symbol: '/a/', phonemeFile: 'a.mp3', examples: [
+            { word: 'так', audioFile: 'так.mp3' }, { word: 'мама', audioFile: 'мама.mp3' }, { word: 'сади', audioFile: 'сади.mp3' }
         ]},
-        { symbol: '/ɔ/', phonemeFile: 'ukrainain-ɔ.ogg', examples: [
-            { word: 'сон', audioFile: 'сон.ogg' }, { word: 'вода', audioFile: 'вода.ogg' }, { word: 'поле', audioFile: 'поле.ogg' }
+        { symbol: '/ɔ/', phonemeFile: 'ɔ.mp3', examples: [
+            { word: 'сон', audioFile: 'сон.mp3' }, { word: 'вода', audioFile: 'вода.mp3' }, { word: 'поле', audioFile: 'поле.mp3' }
         ]},
-        { symbol: '/u/', phonemeFile: 'ukrainain-u.ogg', examples: [
-            { word: 'дуб', audioFile: 'дуб.ogg' }, { word: 'сума', audioFile: 'сума.ogg' }, { word: 'рука', audioFile: 'рука.ogg' }
+        { symbol: '/u/', phonemeFile: 'u.mp3', examples: [
+            { word: 'дуб', audioFile: 'дуб.mp3' }, { word: 'сума', audioFile: 'сума.mp3' }, { word: 'рука', audioFile: 'рука.mp3' }
         ]},
         // Consonants
-        { symbol: '/p/', phonemeFile: 'ukrainian-p.ogg', examples: [
-            { word: 'тато', audioFile: 'тато.ogg' }, { word: 'поле', audioFile: 'поле.ogg' }, { word: 'суп', audioFile: 'суп.ogg' }
+        { symbol: '/p/', phonemeFile: 'p.mp3', examples: [
+            { word: 'тато', audioFile: 'тато.mp3' }, { word: 'поле', audioFile: 'поле.mp3' }, { word: 'суп', audioFile: 'суп.mp3' }
         ]},
-        { symbol: '/b/', phonemeFile: 'ukrainian-b.ogg', examples: [
-            { word: 'дуб', audioFile: 'дуб.ogg' }, { word: 'риба', audioFile: 'риба.ogg' }, { word: 'баба', audioFile: 'баба.ogg' }
+        { symbol: '/b/', phonemeFile: 'b.mp3', examples: [
+            { word: 'дуб', audioFile: 'дуб.mp3' }, { word: 'риба', audioFile: 'риба.mp3' }, { word: 'баба', audioFile: 'баба.mp3' }
         ]},
-        { symbol: '/t/', phonemeFile: 'ukrainian-t.ogg', examples: [
-            { word: 'так', audioFile: 'так.ogg' }, { word: 'тінь', audioFile: 'тінь.ogg' }, { word: 'тато', audioFile: 'тато.ogg' }
+        { symbol: '/t/', phonemeFile: 't.mp3', examples: [
+            { word: 'так', audioFile: 'так.mp3' }, { word: 'тінь', audioFile: 'тінь.mp3' }, { word: 'тато', audioFile: 'тато.mp3' }
         ]},
-        { symbol: '/d/', phonemeFile: 'ukrainian-d.ogg', examples: [
-            { word: 'дім', audioFile: 'дім.ogg' }, { word: 'вода', audioFile: 'вода.ogg' }, { word: 'день', audioFile: 'день.ogg' }
+        { symbol: '/d/', phonemeFile: 'd.mp3', examples: [
+            { word: 'дім', audioFile: 'дім.mp3' }, { word: 'вода', audioFile: 'вода.mp3' }, { word: 'день', audioFile: 'день.mp3' }
         ]},
-        { symbol: '/k/', phonemeFile: 'ukrainian-k.ogg', examples: [
-            { word: 'кіт', audioFile: 'кіт.ogg' }, { word: 'так', audioFile: 'так.ogg' }, { word: 'рука', audioFile: 'рука.ogg' }
+        { symbol: '/k/', phonemeFile: 'k.mp3', examples: [
+            { word: 'кіт', audioFile: 'кіт.mp3' }, { word: 'так', audioFile: 'так.mp3' }, { word: 'рука', audioFile: 'рука.mp3' }
         ]},
-        { symbol: '/ɡ/', phonemeFile: 'ukrainian-g.ogg', examples: [
-            { word: 'ґанок', audioFile: 'ґанок.ogg' }, { word: 'ґудзик', audioFile: 'ґудзик.ogg' }, { word: 'аґрус', audioFile: 'аґрус.ogg' }
+        { symbol: '/ɡ/', phonemeFile: 'g.mp3', examples: [
+            { word: 'ґанок', audioFile: 'ґанок.mp3' }, { word: 'ґудзик', audioFile: 'ґудзик.mp3' }, { word: 'аґрус', audioFile: 'аґрус.mp3' }
         ]},
-        { symbol: '/m/', phonemeFile: 'ukrainian-m.ogg', examples: [
-            { word: 'мама', audioFile: 'мама.ogg' }, { word: 'дім', audioFile: 'дім.ogg' }, { word: 'сума', audioFile: 'сума.ogg' }
+        { symbol: '/m/', phonemeFile: 'm.mp3', examples: [
+            { word: 'мама', audioFile: 'мама.mp3' }, { word: 'дім', audioFile: 'дім.mp3' }, { word: 'сума', audioFile: 'сума.mp3' }
         ]},
-        { symbol: '/n/', phonemeFile: 'ukrainian-n.ogg', examples: [
-            { word: 'сон', audioFile: 'сон.ogg' }, { word: 'ніс', audioFile: 'ніс.ogg' }, { word: 'син', audioFile: 'син.ogg' }
+        { symbol: '/n/', phonemeFile: 'n.mp3', examples: [
+            { word: 'сон', audioFile: 'сон.mp3' }, { word: 'ніс', audioFile: 'ніс.mp3' }, { word: 'син', audioFile: 'син.mp3' }
         ]},
-        { symbol: '/f/', phonemeFile: 'ukrainian-f.ogg', examples: [
-            { word: 'фікус', audioFile: 'фікус.ogg' }, { word: 'факт', audioFile: 'факт.ogg' }, { word: 'кафе', audioFile: 'кафе.ogg' }
+        { symbol: '/f/', phonemeFile: 'f.mp3', examples: [
+            { word: 'фікус', audioFile: 'фікус.mp3' }, { word: 'факт', audioFile: 'факт.mp3' }, { word: 'кафе', audioFile: 'кафе.mp3' }
         ]},
-        { symbol: '/v/', phonemeFile: 'ukrainian-v.ogg', examples: [
-            { word: 'вода', audioFile: 'вода.ogg' }, { word: 'вовк', audioFile: 'вовк.ogg' }, { word: 'лев', audioFile: 'лев.ogg' }
+        { symbol: '/v/', phonemeFile: 'v.mp3', examples: [
+            { word: 'вода', audioFile: 'вода.mp3' }, { word: 'вовк', audioFile: 'вовк.mp3' }, { word: 'лев', audioFile: 'лев.mp3' }
         ]},
-        { symbol: '/s/', phonemeFile: 'ukrainian-s.ogg', examples: [
-            { word: 'сон', audioFile: 'сон.ogg' }, { word: 'сіль', audioFile: 'сіль.ogg' }, { word: 'ліс', audioFile: 'ліс.ogg' }
+        { symbol: '/s/', phonemeFile: 's.mp3', examples: [
+            { word: 'сон', audioFile: 'сон.mp3' }, { word: 'сіль', audioFile: 'сіль.mp3' }, { word: 'ліс', audioFile: 'ліс.mp3' }
         ]},
-        { symbol: '/z/', phonemeFile: 'ukrainian-z.ogg', examples: [
-            { word: 'зуб', audioFile: 'зуб.ogg' }, { word: 'ваза', audioFile: 'ваза.ogg' }, { word: 'зима', audioFile: 'зима.ogg' }
+        { symbol: '/z/', phonemeFile: 'z.mp3', examples: [
+            { word: 'зуб', audioFile: 'зуб.mp3' }, { word: 'ваза', audioFile: 'ваза.mp3' }, { word: 'зима', audioFile: 'зима.mp3' }
         ]},
-        { symbol: '/ʃ/', phonemeFile: 'ukrainian-sh.ogg', examples: [
-            { word: 'шіст', audioFile: 'шіст.ogg' }, { word: 'шапка', audioFile: 'шапка.ogg' }, { word: 'миша', audioFile: 'миша.ogg' }
+        { symbol: '/ʃ/', phonemeFile: 'sh.mp3', examples: [
+            { word: 'шіст', audioFile: 'шіст.mp3' }, { word: 'шапка', audioFile: 'шапка.mp3' }, { word: 'миша', audioFile: 'миша.mp3' }
         ]},
-        { symbol: '/ʒ/', phonemeFile: 'ukrainian-zh.ogg', examples: [
-            { word: 'жаба', audioFile: 'жаба.ogg' }, { word: 'жито', audioFile: 'жито.ogg' }, { word: 'вуж', audioFile: 'вуж.ogg' }
+        { symbol: '/ʒ/', phonemeFile: 'zh.mp3', examples: [
+            { word: 'жаба', audioFile: 'жаба.mp3' }, { word: 'жито', audioFile: 'жито.mp3' }, { word: 'вуж', audioFile: 'вуж.mp3' }
         ]},
-        { symbol: '/x/', phonemeFile: 'ukrainian-kh.ogg', examples: [
-            { word: 'хліб', audioFile: 'хліб.ogg' }, { word: 'хата', audioFile: 'хата.ogg' }, { word: 'вухо', audioFile: 'вухо.ogg' }
+        { symbol: '/x/', phonemeFile: 'kh.mp3', examples: [
+            { word: 'хліб', audioFile: 'хліб.mp3' }, { word: 'хата', audioFile: 'хата.mp3' }, { word: 'вухо', audioFile: 'вухо.mp3' }
         ]},
-        { symbol: '/ɦ/', phonemeFile: 'ukrainian-h.ogg', examples: [
-            { word: 'голова', audioFile: 'голова.ogg' }, { word: 'нога', audioFile: 'нога.ogg' }, { word: 'сніг', audioFile: 'сніг.ogg' }
+        { symbol: '/ɦ/', phonemeFile: 'h.mp3', examples: [
+            { word: 'голова', audioFile: 'голова.mp3' }, { word: 'нога', audioFile: 'нога.mp3' }, { word: 'сніг', audioFile: 'сніг.mp3' }
         ]},
-        { symbol: '/t͡s/', phonemeFile: 'ukrainian-ts.ogg', examples: [
-            { word: 'цап', audioFile: 'цап.ogg' }, { word: 'ціна', audioFile: 'ціна.ogg' }, { word: 'кінець', audioFile: 'кінець.ogg' }
+        { symbol: '/t͡s/', phonemeFile: 'ts.mp3', examples: [
+            { word: 'цап', audioFile: 'цап.mp3' }, { word: 'ціна', audioFile: 'ціна.mp3' }, { word: 'кінець', audioFile: 'кінець.mp3' }
         ]},
-        { symbol: '/d͡z/', phonemeFile: 'ukrainian-dz.ogg', examples: [
-            { word: 'дзеркало', audioFile: 'дзеркало.ogg' }, { word: 'дзьоб', audioFile: 'дзьоб.ogg' }, { word: 'ґедзь', audioFile: 'ґедзь.ogg' }
+        { symbol: '/d͡z/', phonemeFile: 'dz.mp3', examples: [
+            { word: 'дзеркало', audioFile: 'дзеркало.mp3' }, { word: 'дзьоб', audioFile: 'дзьоб.mp3' }, { word: 'ґедзь', audioFile: 'ґедзь.mp3' }
         ]},
-        { symbol: '/t͡ʃ/', phonemeFile: 'ukrainian-ch.ogg', examples: [
-            { word: 'час', audioFile: 'час.ogg' }, { word: 'ніч', audioFile: 'ніч.ogg' }, { word: 'читати', audioFile: 'читати.ogg' }
+        { symbol: '/t͡ʃ/', phonemeFile: 'ch.mp3', examples: [
+            { word: 'час', audioFile: 'час.mp3' }, { word: 'ніч', audioFile: 'ніч.mp3' }, { word: 'читати', audioFile: 'читати.mp3' }
         ]},
-        { symbol: '/d͡ʒ/', phonemeFile: 'ukrainian-dzh.ogg', examples: [
-            { word: 'джміль', audioFile: 'джміль.ogg' }, { word: 'джем', audioFile: 'джем.ogg' }, { word: 'ходжу', audioFile: 'ходжу.ogg' }
+        { symbol: '/d͡ʒ/', phonemeFile: 'dzh.mp3', examples: [
+            { word: 'джміль', audioFile: 'джміль.mp3' }, { word: 'джем', audioFile: 'джем.mp3' }, { word: 'ходжу', audioFile: 'ходжу.mp3' }
         ]},
-        { symbol: '/l/', phonemeFile: 'ukrainian-l.ogg', examples: [
-            { word: 'лев', audioFile: 'лев.ogg' }, { word: 'поле', audioFile: 'поле.ogg' }, { word: 'сіль', audioFile: 'сіль.ogg' }
+        { symbol: '/l/', phonemeFile: 'l.mp3', examples: [
+            { word: 'лев', audioFile: 'лев.mp3' }, { word: 'поле', audioFile: 'поле.mp3' }, { word: 'сіль', audioFile: 'сіль.mp3' }
         ]},
-        { symbol: '/r/', phonemeFile: 'ukrainian-r.ogg', examples: [
-            { word: 'рука', audioFile: 'рука.ogg' }, { word: 'риба', audioFile: 'риба.ogg' }, { word: 'цар', audioFile: 'цар.ogg' }
+        { symbol: '/r/', phonemeFile: 'r.mp3', examples: [
+            { word: 'рука', audioFile: 'рука.mp3' }, { word: 'риба', audioFile: 'риба.mp3' }, { word: 'цар', audioFile: 'цар.mp3' }
         ]},
-        { symbol: '/j/', phonemeFile: 'ukrainian-j.ogg', examples: [
-            { word: 'йод', audioFile: 'йод.ogg' }, { word: 'яма', audioFile: 'яма.ogg' }, { word: 'мої', audioFile: 'мої.ogg' }
+        { symbol: '/j/', phonemeFile: 'j.mp3', examples: [
+            { word: 'йод', audioFile: 'йод.mp3' }, { word: 'яма', audioFile: 'яма.mp3' }, { word: 'мої', audioFile: 'мої.mp3' }
         ]},
         // Palatalized Consonants
-        { symbol: '/tʲ/', phonemeFile: 'ukrainian-t-palatalized.ogg', examples: [
-            { word: 'тінь', audioFile: 'тінь.ogg' }, { word: 'тісто', audioFile: 'тісто.ogg' }, { word: 'тютюн', audioFile: 'тютюн.ogg' }
+        { symbol: '/tʲ/', phonemeFile: 't-palatalized.mp3', examples: [
+            { word: 'тінь', audioFile: 'тінь.mp3' }, { word: 'тісто', audioFile: 'тісто.mp3' }, { word: 'тютюн', audioFile: 'тютюн.mp3' }
         ]},
-        { symbol: '/dʲ/', phonemeFile: 'ukrainian-d-palatalized.ogg', examples: [
-            { word: 'дідько', audioFile: 'дідько.ogg' }, { word: 'дядько', audioFile: 'дядько.ogg' }, { word: 'мідь', audioFile: 'мідь.ogg' }
+        { symbol: '/dʲ/', phonemeFile: 'd-palatalized.mp3', examples: [
+            { word: 'дідько', audioFile: 'дідько.mp3' }, { word: 'дядько', audioFile: 'дядько.mp3' }, { word: 'мідь', audioFile: 'мідь.mp3' }
         ]},
-        { symbol: '/sʲ/', phonemeFile: 'ukrainian-s-palatalized.ogg', examples: [
-            { word: 'сіно', audioFile: 'сіно.ogg' }, { word: 'вісь', audioFile: 'вісь.ogg' }, { word: 'сьомий', audioFile: 'сьомий.ogg' }
+        { symbol: '/sʲ/', phonemeFile: 's-palatalized.mp3', examples: [
+            { word: 'сіно', audioFile: 'сіно.mp3' }, { word: 'вісь', audioFile: 'вісь.mp3' }, { word: 'сьомий', audioFile: 'сьомий.mp3' }
         ]},
-        { symbol: '/zʲ/', phonemeFile: 'ukrainian-z-palatalized.ogg', examples: [
-            { word: 'зір', audioFile: 'зір.ogg' }, { word: 'зяблик', audioFile: 'зяблик.ogg' }, { word: 'князь', audioFile: 'князь.ogg' }
+        { symbol: '/zʲ/', phonemeFile: 'z-palatalized.mp3', examples: [
+            { word: 'зір', audioFile: 'зір.mp3' }, { word: 'зяблик', audioFile: 'зяблик.mp3' }, { word: 'князь', audioFile: 'князь.mp3' }
         ]},
-        { symbol: '/t͡sʲ/', phonemeFile: 'ukrainian-ts-palatalized.ogg', examples: [
-            { word: 'ціль', audioFile: 'ціль.ogg' }, { word: 'палець', audioFile: 'палець.ogg' }, { word: 'хлопець', audioFile: 'хлопец.ogg' }
+        { symbol: '/t͡sʲ/', phonemeFile: 'ts-palatalized.mp3', examples: [
+            { word: 'ціль', audioFile: 'ціль.mp3' }, { word: 'палець', audioFile: 'палець.mp3' }, { word: 'хлопець', audioFile: 'хлопець.mp3' } // Assuming хлопец.ogg was a typo for хлопець.mp3
         ]},
-        { symbol: '/lʲ/', phonemeFile: 'ukrainian-l-palatalized.ogg', examples: [
-            { word: 'ліс', audioFile: 'ліс.ogg' }, { word: 'лялька', audioFile: 'лялька.ogg' }, { word: 'сіль', audioFile: 'сіль.ogg' }
+        { symbol: '/lʲ/', phonemeFile: 'l-palatalized.mp3', examples: [
+            { word: 'ліс', audioFile: 'ліс.mp3' }, { word: 'лялька', audioFile: 'лялька.mp3' }, { word: 'сіль', audioFile: 'сіль.mp3' }
         ]},
-        { symbol: '/nʲ/', phonemeFile: 'ukrainian-n-palatalized.ogg', examples: [
-            { word: 'ніч', audioFile: 'ніч.ogg' }, { word: 'кінь', audioFile: 'кінь.ogg' }, { word: 'синь', audioFile: 'синь.ogg' }
+        { symbol: '/nʲ/', phonemeFile: 'n-palatalized.mp3', examples: [
+            { word: 'ніч', audioFile: 'ніч.mp3' }, { word: 'кінь', audioFile: 'кінь.mp3' }, { word: 'синь', audioFile: 'синь.mp3' }
         ]},
     ];
 
@@ -142,7 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // On iOS, the first audio play must be directly user-initiated.
             // We play the requested sound and immediately pause it to "unlock" the audio context.
             audioPlayer.src = `${pathPrefix}${soundFile}`;
-            audioPlayer.load();
+            // audioPlayer.load(); // .play() should initiate loading if src is set.
+                               // Removing this to see if it makes a difference in the unlock phase.
             const unlockPromise = audioPlayer.play();
 
             if (unlockPromise !== undefined) {
@@ -154,13 +155,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Now play the sound for real
                     actuallyPlaySound(element, soundFile, pathPrefix);
                 }).catch(error => {
-                    console.error("Audio unlock play() failed. Subsequent plays might also fail on iOS.", error);
+                    console.error("Audio unlock play() FAILED. Subsequent plays might also fail on iOS. Check audio file format and ensure user interaction.", error, audioPlayer.error);
                     // Don't mark as unlocked if the initial play fails. User might need to interact again.
                     stopCurrentAudio(); // Clean up UI
                 });
             } else {
                 // Fallback for browsers that don't return a promise (rare for modern browsers)
                 // Assume it might work or not be needed, or try to play directly.
+                console.warn("audio.play() did not return a promise during unlock. Proceeding by tentatively marking as unlocked.");
                 isAudioContextUnlocked = true; // Tentatively mark as unlocked
                 actuallyPlaySound(element, soundFile, pathPrefix);
             }
@@ -182,14 +184,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (playPromise !== undefined) {
             playPromise.then(() => {
                 element.classList.add('playing');
-            }).catch(error => {
-                console.error("Playback failed:", error);
+            }).catch(error => { // This is the catch for the actual playback attempt
+                console.error(`Actual playback failed for ${soundFile}:`, error, audioPlayer.error);
                 // Ensure UI is cleaned up if play fails
                 if (activeElement === element) { // Check if it's still the active one
                     stopCurrentAudio();
                 }
             });
         }
+        // No explicit 'else' for non-promise play() as modern iOS Safari (on iPhone 10) fully supports promises for media playback.
+        // If this were for much older browsers, non-promise handling would be needed.
     };
 
     const createSoundCard = (soundObj) => {
